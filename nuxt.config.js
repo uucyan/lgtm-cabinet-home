@@ -8,7 +8,7 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: pkg.name,
+    title: 'LGTM Cabinet Home',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -24,11 +24,18 @@ module.exports = {
   */
   loading: { color: '#fff' },
 
+  loadingIndicator: {
+    name: 'folding-cube',
+    color: '#573216',
+    background: 'white'
+  },
+
   /*
   ** Global CSS
   */
   css: [
-    'element-ui/lib/theme-chalk/index.css'
+    'element-ui/lib/theme-chalk/index.css',
+    '~assets/sass/style.sass',
   ],
 
   /*
@@ -42,6 +49,7 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/style-resources',
   ],
 
   /*
@@ -49,12 +57,22 @@ module.exports = {
   */
   build: {
     transpile: [/^element-ui/],
-    
+
     /*
     ** You can extend webpack config here
     */
     extend(config, ctx) {
-      
+      config.module.rules.push({
+        test: /\.coffee$/,
+        use: 'coffee-loader',
+        exclude: /(node_modules)/
+      })
     }
-  }
+  },
+
+  styleResources: {
+    sass: [
+      './assets/sass/variables/_color.sass',
+    ]
+  },
 }
