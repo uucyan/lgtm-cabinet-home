@@ -1,9 +1,7 @@
 <template lang="pug">
 el-container.main
-  el-header.wood-grain-dark-brown.z-index-1(height='85px' style='padding: 20px 20px 0px 20px; filter: drop-shadow(10px 10px 10px rgba(0,0,0,0.5));')
-    div.header-element-left
-      p.header-title.overflow-x-auto
-  el-main.wood-grain-white.z-index-0
+  el-main.z-index-0
+    .margin-bottom-30px
     div.display-table.logo-area
       div.logo.display-inline-block
       div.title.display-inline-block
@@ -11,11 +9,12 @@ el-container.main
         p Cabinet
     div.cabinet
       .cube.wood-grain-dark-brown
-        el-button.wood-grain-dark-brown(
-          icon='el-icon-info'
-          class="button"
-          round
-        ) はじめに
+        nuxt-link(to="/description")
+          el-button.wood-grain-dark-brown(
+            icon='el-icon-info'
+            class="button"
+            round
+          ) はじめに
         .right-side.wood-grain-dark-brown
         .top-side.wood-grain-dark-brown
       .cube.wood-grain-dark-brown
@@ -38,6 +37,11 @@ el-container.main
 <script lang="coffee">
 export default
   name: 'Index'
+
+  transition:
+    name: 'zoom'
+    enterActiveClass: 'animated bounceIn'
+    leaveActiveClass: 'animated zoomOut'
 </script>
 
 <style lang="sass" scoped>
@@ -55,7 +59,7 @@ export default
   display: inline-block
   text-align: left
   vertical-align: middle
-  @media screen and (max-width: 842px)
+  @media screen and (max-width: 593px)
     text-align: center
 
 .title
@@ -99,7 +103,7 @@ export default
   width: 70%
   height: 200px
   position: relative
-  @media screen and (max-width: 842px)
+  @media screen and (max-width: 593px)
     width: 60%
 
 .top-side
@@ -111,7 +115,7 @@ export default
   width: 100%
   transform-origin: 0 0
   transform: skewX(-45deg)
-  @media screen and (max-width: 842px)
+  @media screen and (max-width: 593px)
     top: -70px
     left: 70px
     height: 70px
@@ -125,7 +129,7 @@ export default
   width: 100px
   transform-origin: 0 0
   transform: skewY(-45deg)
-  @media screen and (max-width: 842px)
+  @media screen and (max-width: 593px)
     right: -70px
     width: 70px
 </style>
