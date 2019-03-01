@@ -2,42 +2,32 @@
 el-container.main
   el-main.z-index-0
     .margin-bottom-30px
-    div.display-table.logo-area
-      div.logo.display-inline-block
-      div.title.display-inline-block
+    .display-table.logo-area
+      .logo.display-inline-block(v-if="documentWidth593OrMore")
+      .title.display-inline-block
         p LGTM
         p Cabinet
-    div.cabinet
-      .cube.wood-grain-dark-brown
-        nuxt-link(to="/description")
-          el-button.wood-grain-dark-brown(
-            icon='el-icon-info'
-            class="button"
-            round
-          ) はじめに
-        .right-side.wood-grain-dark-brown
-        .top-side.wood-grain-dark-brown
-      .cube.wood-grain-dark-brown
-        el-button.wood-grain-dark-brown(
-          icon='el-icon-document'
-          class="button"
-          round
-        ) リリース
-      .cube.wood-grain-dark-brown
-        a(href="https://github.com/uucyan/lgtm-cabinet" target="_blank")
-          el-button.wood-grain-dark-brown(
-            class="button"
-            round
-          )
-            div.github-icon
-            span.github-text GitHub
+    .cabinet
+      nuxt-link(to="/description")
+        .cube.wood-grain-dark-brown
+          .dent.wood-grain-dark-brown
+      nuxt-link(to="/description")
+        .cube.wood-grain-dark-brown
+          .dent.wood-grain-dark-brown
+      a(href="https://github.com/uucyan/lgtm-cabinet" target="_blank")
+        .cube.wood-grain-dark-brown
+          .dent.wood-grain-dark-brown
+      .right-side.wood-grain-dark-brown
+      .top-side.wood-grain-dark-brown
 
 </template>
 
 <script lang="coffee">
+import HandleResizeMixin from "~/components/HandleResizeMixin.coffee"
+
 export default
   name: 'Index'
-
+  mixins: [ HandleResizeMixin ]
   transition:
     name: 'zoom'
     enterActiveClass: 'animated bounceIn'
@@ -88,23 +78,28 @@ export default
   position: relative
   z-index: -1
   filter: drop-shadow(10px -3px 8px rgba(0,0,0,0.5))
+  width: 70%
+  margin-right: auto
+  margin-left: auto
+  @media screen and (max-width: 593px)
+    width: 60%
 
 .cube
   padding: 20px
   box-sizing: border-box
-  margin-right: auto
-  margin-left: auto
   display: flex
   justify-content: center
   align-items: center
   text-align: center
   flex-direction: column
+  border-top: solid 1px $color-dark-brown
   border-bottom: solid 1px $color-dark-brown
-  width: 70%
+  width: 100%
   height: 200px
-  position: relative
-  @media screen and (max-width: 593px)
-    width: 60%
+  border-radius: 10px 10px 10px 10px
+
+.cube:hover
+  filter: drop-shadow(10px 0px 10px rgba(0,0,0,0.5))
 
 .top-side
   box-sizing: border-box
@@ -115,6 +110,7 @@ export default
   width: 100%
   transform-origin: 0 0
   transform: skewX(-45deg)
+  border-radius: 6px 2px 1px 6px
   @media screen and (max-width: 593px)
     top: -70px
     left: 70px
@@ -129,7 +125,17 @@ export default
   width: 100px
   transform-origin: 0 0
   transform: skewY(-45deg)
+  border-radius: 1px 2px 6px 6px
   @media screen and (max-width: 593px)
     right: -70px
     width: 70px
+
+.dent
+  width: 120px
+  height: 40px
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.08), 0px 4px 10px -6px #000000 inset
+  border-radius: 6px 6px 6px 6px
+  @media screen and (max-width: 593px)
+    width: 100px
+    height: 20px
 </style>
